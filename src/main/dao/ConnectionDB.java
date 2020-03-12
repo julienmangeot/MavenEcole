@@ -1,0 +1,28 @@
+package fr.adaming.MavenEcole;
+
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+public class ConnectionDB {
+	
+	private SessionFactory factory=null;
+	private static ConnectionDB instance=null;
+	
+	private ConnectionDB() {
+	}
+	
+	public SessionFactory getFactory() {
+		if(factory==null) {
+			factory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+		}
+		return factory;
+	} 
+
+	public static ConnectionDB getInstance() {
+		if(instance==null) {
+			instance = new ConnectionDB();
+		}
+		return instance;
+	}
+}
+
